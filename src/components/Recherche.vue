@@ -32,6 +32,8 @@
           </b-card>
         </b-col>
       </b-row>
+
+      {{resultat}}
     </b-container>
 
 
@@ -45,7 +47,8 @@
     data() {
       return {
         title: "",
-        alert: false
+        alert: false,
+        resultat: ""
       };
     },
   methods:{
@@ -57,6 +60,7 @@
                 .then((response) => {
                   if (response.status) {
                     console.log(response.data.results);
+                    this.resultat = response.data.results;
                     this.title = "";
                     this.alert = false;
                   } else {
