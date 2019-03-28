@@ -10,7 +10,7 @@
             <b-row>
 
                 <b-col sm="12">
-                    <b-card class="text-center">
+                    <b-card class="text-center" >
                         <b-card-title style="max-width: 20rem;" class="mb-2">
                             Recherche d'un film
                         </b-card-title>
@@ -50,7 +50,7 @@
               <b-table class="tablefilm" :items="resultat" :fields="fields">
                 <template slot="description" slot-scope="row" >
                   {{ row.item.overview.substr(0, 70) }}... 
-                    <b-button size="sm" @click="row.toggleDetails" class="mr-2 float_left_button">
+                    <b-button size="sm" @click="row.toggleDetails" class="mr-2 float_left_button" style="background-color: turquoise;border-color: darkturquoise;">
                         {{ row.detailsShowing ? '-' : '+'}} 
                     </b-button>
                 </template>
@@ -142,6 +142,7 @@
         font-size: 14px;
         margin-right: auto;
         margin-left: auto;
+        background-color: white;
     }
 
     .float_left_button {
