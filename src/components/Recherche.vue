@@ -27,13 +27,27 @@
                         required
                 />
                 <br />
-                <b-button type="submit" variant="primary">Chercher</b-button>
               </b-form>
             </b-card-text>
           </b-card>
         </b-col>
       </b-row>
-
+      <table border="1px solid black;">
+        <thead>
+          <tr>
+          <th>Nom </th>
+          <th>Description</th>
+          <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr v-for="film in resultat">
+            <td>{{ film.original_title }}</td>
+            <td class="overview_film">{{ film.overview }}</td>
+            <td>add fav</td>
+          </tr>
+        </tbody>
+        </table>
     </b-container>
 
 
@@ -47,19 +61,27 @@
     data() {
       return {
         title: "",
+        current_title_search: "",
         alert: false,
         resultat: ""
       };
     },
   methods:{
     submit() {
-
+      
       //console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
       if (this.title.length >= 1) {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title.replace(" ", "+")}`)
                 .then((response) => {
                   if (response.status) {
+                    // Check if the current value of the field linked to this.title is different from the current title search
+                    if (this.current_title_search !== this.title) {
 
+                      // If it's different, we set the current search to the title value
+                      this.current_title_search = this.title;
+                    }else{
+                      return;
+                    }
                     this.resultat = response.data.results;
                     this.alert = false;
                   } else {
@@ -88,5 +110,9 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.overview_film {
+  font-size: 10px;
 }
 </style>
