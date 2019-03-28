@@ -41,7 +41,6 @@
 
 <script>
   import axios from 'axios'
-
   export default {
     data() {
       return {
@@ -57,7 +56,7 @@
                 .then((response) => {
                   if (response.data.status) {
                     this.alert = false;
-                    console.log(response.data.product);
+                    console.log(response.data);
                     this.title = "";
                   } else {
                     this.alert = true;
