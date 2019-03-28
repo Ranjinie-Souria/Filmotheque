@@ -47,6 +47,18 @@
             </table>-->
         </b-container><br/>
             <div v-if="recherche"><b-table class="tablefilm" :items="resultat" :fields="fields">
+                <template slot="description" slot-scope="row">
+                    <b-button size="sm" @click="row.toggleDetails" class="mr-2">
+                        {{ row.detailsShowing ? 'Cacher' : 'Montrer'}} la description
+                    </b-button>
+                </template>
+                <template slot="row-details" slot-scope="row">
+                    <b-card>
+                        <b-row class="mb-2">
+                            <b-col>{{ row.item.overview }}</b-col>
+                        </b-row>
+                    </b-card>
+                </template>
                 <template slot="add">
                     <img src="../assets/fav.png" v-on:click="fav()" alt="fav"/>
                 </template>
@@ -66,7 +78,7 @@
         data() {
             return {
                 title: "",
-                fields: ['original_title', 'overview', 'add'],
+                fields: ['original_title', 'description', 'add'],
                 current_title_search: "",
                 resultat: "",
                 recherche: false
