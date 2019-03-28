@@ -23,6 +23,7 @@
                 <b-form-input
                         v-model="title"
                         placeholder="Entrez le nom du film"
+                        v-on:keyup="submit"
                         required
                 />
                 <br />
@@ -60,7 +61,6 @@
                   if (response.status) {
 
                     this.resultat = response.data.results;
-                    this.title = "";
                     this.alert = false;
                   } else {
                     this.alert = true;
