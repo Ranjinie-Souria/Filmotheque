@@ -48,7 +48,6 @@
           </tr>
         </tbody>
         </table>
-      {{resultat}}
     </b-container>
 
 
@@ -76,15 +75,13 @@
                 .then((response) => {
                   if (response.status) {
                     // Check if the current value of the field linked to this.title is different from the current title search
-                    if (this.current_title_search != this.title) {
+                    if (this.current_title_search !== this.title) {
 
                       // If it's different, we set the current search to the title value
                       this.current_title_search = this.title;
                     }else{
                       return;
                     }
-                    console.log(response.data.results);
-
                     this.resultat = response.data.results;
                     this.alert = false;
                   } else {
