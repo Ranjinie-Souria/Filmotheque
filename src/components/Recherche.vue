@@ -51,6 +51,7 @@
     },
   methods:{
     submit() {
+      console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
       if (!isNaN(this.title)) {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`)
                 .then((response) => {
