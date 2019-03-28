@@ -46,10 +46,12 @@
             </tbody>
             </table>-->
         </b-container><br/>
-            <div v-if="recherche"><b-table class="tablefilm" :items="resultat" :fields="fields">
-                <template slot="description" slot-scope="row">
-                    <b-button size="sm" @click="row.toggleDetails" class="mr-2">
-                        {{ row.detailsShowing ? 'Cacher' : 'Montrer'}} la description
+            <div v-if="recherche">
+              <b-table class="tablefilm" :items="resultat" :fields="fields">
+                <template slot="description" slot-scope="row" >
+                  {{ row.item.overview.substr(0, 70) }}... 
+                    <b-button size="sm" @click="row.toggleDetails" class="mr-2 float_left_button">
+                        {{ row.detailsShowing ? '-' : '+'}} 
                     </b-button>
                 </template>
                 <template slot="row-details" slot-scope="row">
@@ -140,5 +142,9 @@
         font-size: 14px;
         margin-right: auto;
         margin-left: auto;
+    }
+
+    .float_left_button {
+      float:right;
     }
 </style>
