@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr v-for="film in resultat">
+          <tr v-for="film in resultat" :key="film.id">
             <td>{{ film.original_title }}</td>
             <td class="overview_film">{{ film.overview }}</td>
             <td>add fav</td>
