@@ -32,7 +32,22 @@
           </b-card>
         </b-col>
       </b-row>
-
+      <table border="1px solid black;">
+        <thead>
+          <tr>
+          <th>Nom </th>
+          <th>Description</th>
+          <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr v-for="film in resultat" :key="film">
+            <td>{{ film.original_title }}</td>
+            <td class="overview_film">{{ film.overview }}</td>
+            <td>add fav</td>
+          </tr>
+        </tbody>
+        </table>
       {{resultat}}
     </b-container>
 
@@ -60,6 +75,7 @@
                 .then((response) => {
                   if (response.status) {
                     console.log(response.data.results);
+
                     this.resultat = response.data.results;
                     this.title = "";
                     this.alert = false;
@@ -89,5 +105,9 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.overview_film {
+  font-size: 10px;
 }
 </style>
