@@ -50,8 +50,9 @@
     },
   methods:{
     submit() {
-      console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
-      if (!isNaN(this.title)) {
+      
+      //console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
+      if (this.title.length >= 1) {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`)
                 .then((response) => {
                   if (response.data.status) {
