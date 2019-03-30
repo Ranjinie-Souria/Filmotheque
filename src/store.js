@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     film: [],
     filmotheque: new Filmotheque(),
+    afficheFilm: [],
     castFilm: [],
     crewFilm: []
   },
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     leFilm: state => {
       return state.film
+    },
+    lAfficheFilm: state => {
+      return state.afficheFilm
     },
     leCastFilm: state => {
       return state.castFilm
@@ -41,6 +45,9 @@ export default new Vuex.Store({
     },
     SET_CREWFILM: (state, crew) => {
       state.crewFilm.push(crew)
+    },
+    SET_AFFICHEFILM: (state, affiche) => {
+      state.afficheFilm.push(affiche)
     }
   },
   actions: {

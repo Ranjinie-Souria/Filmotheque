@@ -1,10 +1,13 @@
 <template>
     <div>
         <b-button v-b-modal.modal-1 @click="submit">
-            Show Modal
+            Modal
         </b-button>
         <!-- Modal Component -->
-        <b-modal id="modal-1" title="BootstrapVue">
+        <b-modal id="modal-1" title="Film Favori">
+            <div>
+                <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
+            </div>
             <div>
                 <b-table class="tableFilm" :items="infoFilm" :fields="fieldsFilm">
                     <template slot="titre">
@@ -37,6 +40,8 @@
                 infoFilm: [],
                 castFilm: [],
                 crewFilm: [],
+                baseAffiche: ["https://image.tmdb.org/t/p/w500"],
+                codeAffiche: [],
                 fieldsFilm: ['titre', 'date_de_sortie', ],
                 fieldsReal: ['realisateur'],
                 fieldsAct: ['acteurs'],
@@ -46,15 +51,18 @@
             this.infoFilm = this.$store.getters.leFilm
             this.castFilm = this.$store.getters.leCastFilm
             this.crewFilm = this.$store.getters.leCrewFilm
+            this.codeAffiche = this.baseAffiche+this.$store.getters.lAfficheFilm
         },
         methods: {
             submit(){
-                //console.log(this.castFilm[0])
+                console.log(this.codeAffiche)
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .image {
+        width: 50%;
+    }
 </style>

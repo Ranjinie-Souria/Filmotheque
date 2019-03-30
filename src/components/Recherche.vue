@@ -78,7 +78,7 @@
                 fields: ['original_title', 'description', 'add'],
                 current_title_search: "",
                 resultat: "",
-                recherche: false
+                recherche: false,
             };
         },
         methods: {
@@ -87,7 +87,7 @@
                 //console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
                 if (this.title.length >= 1) {
                     this.recherche = true;
-                    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title.replace(" ", "+")}`)
+                    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title.replace(" ", "+")}&language=fr-FR`)
                         .then((response) => {
                             if (response.status) {
                                 // Check if the current value of the field linked to this.title is different from the current title search
@@ -110,13 +110,21 @@
             fav(id) {
                 //console.log(id)
                 this.$store.commit('SET_FILM', id);
-                axios.get(`https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=c4183e64dc74d13d605f6815173449f3`)
+                axios.get(`https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=c4183e64dc74d13d605f6815173449f3&language=fr-FR`)
                     .then((response) => {
                         if (response) {
                             this.$store.commit('SET_CASTFILM', response.data.cast);
                             this.$store.commit('SET_CREWFILM', response.data.crew);
                         }
                     })
+                axios.get(`https://api.themoviedb.org/3/movie/${id.id}?api_key=c4183e64dc74d13d605f6815173449f3&language=fr-FR`)
+                    .then((response) => {
+                        if (response) {
+                            this.$store.commit('SET_AFFICHEFILM', response.data.poster_path);
+                            //console.log(response.data.poster_path)
+                            //console.log(this.$store.state.afficheFilm)
+                        }
+                })
             }
         }
     }
