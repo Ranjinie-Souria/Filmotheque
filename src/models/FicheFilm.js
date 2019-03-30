@@ -7,7 +7,6 @@ export default class FicheFilm {
         this.realisateur = realisateur;
         this.acteurPrincipaux = acteurPrincipaux;
     }
-
 }
 
 //import FicheFilm from "@/models/FicheFilms.js"

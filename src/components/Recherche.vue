@@ -61,15 +61,10 @@
                         </b-row>
                     </b-card>
                 </template>
-                <template slot="add">
-                    <img src="../assets/fav.png" v-on:click="fav()" alt="fav"/>
+                <template slot="add" slot-scope="row">
+                        <img src="../assets/fav.png" @click="fav(row.item)" alt="fav"/>
                 </template>
             </b-table></div>
-
-
-
-
-
     </div>
 </template>
 
@@ -107,12 +102,22 @@
                                 this.recherche = false;
                             }
                         })
-                }else{
+                } else {
                     this.resultat = "";
                 }
 
+            },
+            fav(id) {
+                //console.log(id)
+                this.$store.commit('SET_FILM', id);
+                axios.get(`https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=c4183e64dc74d13d605f6815173449f3`)
+                    .then((response) => {
+                        if (response) {
+                            this.$store.commit('SET_CASTFILM', response.data.cast);
+                            this.$store.commit('SET_CREWFILM', response.data.crew);
+                        }
+                    })
             }
-
         }
     }
 </script>

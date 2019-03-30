@@ -1,23 +1,46 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Filmotheque from "./models/Filmotheque";
+//import Filmotheque from "./models/Filmotheque";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    listFilms: []
+    film: [],
+    filmotheque: new Filmotheque(),
+    castFilm: [],
+    crewFilm: []
   },
   getters: {
-    laListFilms: state =>{
-      return state.listFilms
+    laFilmotheque: state =>{
+      return state.filmotheque
+    },
+    leFilm: state => {
+      return state.film
+    },
+    leCastFilm: state => {
+      return state.castFilm
+    },
+    leCrewFilm: state => {
+      return state.crewFilm
     }
   },
   mutations: {
     DELETE_FILM: (state, idFilm) => {
-      state.listFilms.splice(state.listFilms.indexOf(idFilm),1)
+      state.filmotheque.deleteFilm(idFilm)
     },
     ADD_FILM: (state, Film) => {
-      state.listFilms.push(Film)
+      state.filmotheque.addFilm(Film)
+    },
+    SET_FILM: (state, index) => {
+      state.film.push(index)
+    },
+    SET_CASTFILM: (state, cast) => {
+      state.castFilm.push(cast)
+    },
+    SET_CREWFILM: (state, crew) => {
+      state.crewFilm.push(crew)
     }
   },
   actions: {
