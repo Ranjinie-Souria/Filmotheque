@@ -19,9 +19,9 @@
                         {{crewFilm[0][0].name}}
                     </template>
                 </b-table>
-                <b-table class="tableFilmActeurs" :items="castFilm[0]" :fields="fieldsAct">
-                    <template slot="acteurs">
-                        {{this.castFilm[0][0].name}}
+                <b-table class="tableFilmActeurs" :items="castFilm[0]" :fields="fieldsAct" :per-page="perPage">
+                    <template slot="acteurs" slot-scope="row">
+                        {{row.item.name}}
                     </template>
                 </b-table>
             </div>
@@ -33,6 +33,7 @@
     export default {
         data() {
             return {
+                perPage: 5,
                 infoFilm: [],
                 castFilm: [],
                 crewFilm: [],
@@ -48,8 +49,7 @@
         },
         methods: {
             submit(){
-                console.log(this.castFilm[0])
-
+                //console.log(this.castFilm[0])
             }
         }
     }
