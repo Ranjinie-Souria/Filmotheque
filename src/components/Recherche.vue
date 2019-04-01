@@ -74,7 +74,7 @@
                             {{titleFilmFav}}
                         </template>
                         <template slot="date_de_sortie">
-                            {{tradDate(this.infoFilm.release_date)}}
+                            {{this.infoFilm.release_date}}
                         </template>
                     </b-table>
                     <div v-if="!crewFilm.isEmpty">
