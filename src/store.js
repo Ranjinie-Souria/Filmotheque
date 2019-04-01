@@ -12,7 +12,7 @@ export default new Vuex.Store({
     afficheFilm: [],
     castFilm: [],
     crewFilm: [],
-    leFilm: {}
+    leFilm: [],
   },
   getters: {
     laFilmotheque: state =>{

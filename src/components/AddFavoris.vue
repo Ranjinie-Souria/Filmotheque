@@ -4,10 +4,15 @@
             Modal
         </b-button>
         <!-- Modal Component -->
-        <b-modal id="modal-1" title="Film Favori"
+        <b-modal id="modal-1" size="lg" title="Voulez-vous ajouter ce film dans vos favoris ?"
                  :header-bg-variant="headerBgVariant"
                  :header-text-variant="headerTextVariant"
-                 :footer-bg-variant="footerBgVariant">
+                 :footer-bg-variant="footerBgVariant"
+                 :scrollable="true"
+                 :cancel-variant="cancelVariant"
+                 :cancel-title="cancelTitle"
+                 :ok-variant="okVariant"
+                 :ok-title="okTitle">
             <div>
                 <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
             </div>
@@ -46,6 +51,10 @@
                 headerBgVariant: 'info',
                 headerTextVariant: 'light',
                 footerBgVariant: 'dark',
+                cancelVariant: 'danger',
+                cancelTitle: 'Annuler',
+                okVariant: 'success',
+                okTitle: 'Valider',
             };
         },
         created() {

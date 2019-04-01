@@ -29,23 +29,6 @@
                     </b-card>
                 </b-col>
             </b-row>
-
-            <!--<table border="1px solid black;">
-            <thead>
-              <tr>
-              <th>Nom </th>
-              <th>Description</th>
-              <th></th>
-                </tr>
-            </thead>
-            <tbody>
-              <tr v-for="film in resultat" :key="film.id">
-                <td>{{ film.original_title }}</td>
-                <td class="overview_film">{{ film.overview }}</td>
-                <td>add fav</td>
-              </tr>
-            </tbody>
-            </table>-->
         </b-container>
         <br/>
         <div v-if="recherche">
@@ -72,30 +55,35 @@
             </b-table>
 
 
-            <b-modal id="modal-1" title="Film Favori"
+            <b-modal id="modal-1" size="lg" title="Voulez-vous ajouter ce film dans vos favoris ?"
                      :header-bg-variant="headerBgVariant"
                      :header-text-variant="headerTextVariant"
-                     :footer-bg-variant="footerBgVariant">
+                     :footer-bg-variant="footerBgVariant"
+                     :scrollable="true"
+                     :cancel-variant="cancelVariant"
+                     :cancel-title="cancelTitle"
+                     :ok-variant="okVariant"
+                     :ok-title="okTitle">
 
                 <div>
                     <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
                 </div>
                 <div>
-                        <b-table class="tableFilm" :fields="fieldsFilm">
+                    <b-table class="tableFilm" :items="ligneModal" :fields="fieldsFilm">
                         <template slot="titre">
-                            {{infoFilm.original_title}}
+                            {{titleFilmFav}}
                         </template>
                         <template slot="date_de_sortie">
-                            {{infoFilm.release_date}}
+                            {{tradDate(this.infoFilm.release_date)}}
                         </template>
                     </b-table>
                     <div v-if="!crewFilm.isEmpty">
-                    <b-table class="tableFilmReal" :fields="fieldsReal">
+                    <b-table class="tableFilmReal" :items="ligneModal" :fields="fieldsReal">
                         <template slot="realisateur">
-                            {{ realisateur }}
+                            {{realisateur}}
                         </template>
                     </b-table>
-                    <b-table class="tableFilmActeurs" :items="castFilm[0]" :fields="fieldsAct" :per-page="perPage">
+                    <b-table class="tableFilmActeurs" :items="castFilm" :fields="fieldsAct" :per-page="perPage">
                         <template slot="acteurs" slot-scope="row">
                             {{row.item.name}}
                         </template>
@@ -118,7 +106,8 @@
     export default {
         data() {
             return {
-                title: "",
+                ligneModal: [""],
+                titleFilmFav: [],
                 fields: ['original_title', 'description', 'add'],
                 current_title_search: "",
                 resultat: "",
@@ -138,11 +127,14 @@
                 headerBgVariant: 'info',
                 headerTextVariant: 'light',
                 footerBgVariant: 'dark',
+                cancelVariant: 'danger',
+                cancelTitle: 'Annuler',
+                okVariant: 'success',
+                okTitle: 'Valider',
             };
         },
         methods: {
             submit() {
-
                 //console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
                 if (this.title.length >= 1) {
                     this.recherche = true;
@@ -169,6 +161,10 @@
             fav(id) {
                 this.$store.commit('SET_FILM', id);
                 this.$store.commit('SET_LE_FILM', id);
+                this.infoFilm = this.$store.getters.unFilm;
+                this.titleFilmFav = this.infoFilm.title;
+                //console.log(this.infoFilm.title);
+                //console.log(this.titleFilmFav);
                 axios.get(`https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=c4183e64dc74d13d605f6815173449f3&language=fr-FR`)
                     .then((response) => {
                         if (response) {
@@ -176,20 +172,27 @@
                             this.$store.commit('SET_CREWFILM', response.data.crew);
                             this.castFilm = response.data.cast;
                             this.crewFilm = response.data.crew;
-                            this.realisateur = this.crewFilm[0][0].name;
+                            this.realisateur = this.crewFilm[0].name;
+
                         }
                     });
                 axios.get(`https://api.themoviedb.org/3/movie/${id.id}?api_key=c4183e64dc74d13d605f6815173449f3&language=fr-FR`)
                     .then((response) => {
                         if (response) {
                             this.$store.commit('SET_AFFICHEFILM', response.data.poster_path);
-                            this.infoFilm = this.$store.getters.unFilm;
+                            //this.infoFilm = this.$store.getters.unFilm;
                             this.codeAffiche = this.baseAffiche + response.data.poster_path;
-                            console.log("test : " + this.infoFilm.original_title);
+                            //console.log("test : " + this.infoFilm.original_title);
                         }
                     });
 
-            }
+            },
+            //tradDate(str) {
+            //    var annee = str.substr(0, 4);
+            //    var mois = str.substr(5, 2);
+            //    var jour = str.substr(8, 2);
+            //    return jour + " - " + mois + " - " + annee;
+            //}
         }
     }
 </script>
@@ -224,5 +227,9 @@
 
     .float_left_button {
         float: right;
+    }
+
+    .image {
+        width: 35%;
     }
 </style>
