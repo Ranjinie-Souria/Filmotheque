@@ -48,7 +48,7 @@
                     </b-card>
                 </template>
                 <template slot="add" slot-scope="row">
-                    <button v-b-popover.hover.lefttop="'Fera Apparaître une fenêtre pour ajouter le film aux favoris'" title="Ajout aux favoris" type="button"
+                    <button v-b-popover.hover.lefttop="'Fera apparaître une fenêtre pour ajouter le film aux favoris'" title="Ajout aux favoris" type="button"
                             v-b-modal.modal-1="" class="btn" style="background-color: white;border-color: whitesmoke;">
                         <img src="../assets/fav.png" @click="fav(row.item)" alt="fav"/>
                     </button>
