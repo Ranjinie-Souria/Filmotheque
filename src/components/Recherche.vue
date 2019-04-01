@@ -3,6 +3,7 @@
         <h1>Ma filmothèque</h1>
         <p>
             Bienvenue sur la filmothèque. Vous pouvez rechercher un film.
+
         </p>
 
         <br/>
@@ -10,7 +11,7 @@
             <b-row>
 
                 <b-col sm="12">
-                    <b-card class="text-center" >
+                    <b-card class="text-center">
                         <b-card-title style="max-width: 20rem;" class="mb-2">
                             Recherche d'un film
                         </b-card-title>
@@ -45,13 +46,15 @@
               </tr>
             </tbody>
             </table>-->
-        </b-container><br/>
-            <div v-if="recherche">
-              <b-table class="tablefilm" :items="resultat" :fields="fields">
-                <template slot="description" slot-scope="row" >
-                  {{ row.item.overview.substr(0, 70) }}... 
-                    <b-button size="sm" @click="row.toggleDetails" class="mr-2 float_left_button" style="background-color: turquoise;border-color: darkturquoise;">
-                        {{ row.detailsShowing ? '-' : '+'}} 
+        </b-container>
+        <br/>
+        <div v-if="recherche">
+            <b-table class="tablefilm" :items="resultat" :fields="fields">
+                <template slot="description" slot-scope="row">
+                    {{ row.item.overview.substr(0, 70) }}...
+                    <b-button size="sm" @click="row.toggleDetails" class="mr-2 float_left_button"
+                              style="background-color: turquoise;border-color: darkturquoise;">
+                        {{ row.detailsShowing ? '-' : '+'}}
                     </b-button>
                 </template>
                 <template slot="row-details" slot-scope="row">
@@ -62,10 +65,51 @@
                     </b-card>
                 </template>
                 <template slot="add" slot-scope="row">
+                    <button type="button" v-b-modal.modal-1="" class="btn" style="background-color: white;border-color: whitesmoke;">
                         <img src="../assets/fav.png" @click="fav(row.item)" alt="fav"/>
+                    </button>
                 </template>
-            </b-table></div>
+            </b-table>
+
+
+            <b-modal id="modal-1" title="Film Favori"
+                     :header-bg-variant="headerBgVariant"
+                     :header-text-variant="headerTextVariant"
+                     :footer-bg-variant="footerBgVariant">
+
+                <div>
+                    <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
+                </div>
+                <div>
+                        <b-table class="tableFilm" :fields="fieldsFilm">
+                        <template slot="titre">
+                            {{infoFilm.original_title}}
+                        </template>
+                        <template slot="date_de_sortie">
+                            {{infoFilm.release_date}}
+                        </template>
+                    </b-table>
+                    <div v-if="!crewFilm.isEmpty">
+                    <b-table class="tableFilmReal" :fields="fieldsReal">
+                        <template slot="realisateur">
+                            {{ realisateur }}
+                        </template>
+                    </b-table>
+                    <b-table class="tableFilmActeurs" :items="castFilm[0]" :fields="fieldsAct" :per-page="perPage">
+                        <template slot="acteurs" slot-scope="row">
+                            {{row.item.name}}
+                        </template>
+                    </b-table></div>
+                </div>
+
+
+            </b-modal>
+
+        </div>
+
     </div>
+
+
 </template>
 
 <script>
@@ -79,6 +123,21 @@
                 current_title_search: "",
                 resultat: "",
                 recherche: false,
+                perPage: 5,
+                infoFilm: [],
+                castFilm: [],
+                crewFilm: [],
+                realisateur: "",
+                titre : "",
+                baseAffiche: "https://image.tmdb.org/t/p/w500",
+                codeAffiche: "",
+                fieldsFilm: ['titre', 'date_de_sortie',],
+                fieldsReal: ['realisateur'],
+                fieldsAct: ['acteurs'],
+                //variant du modal
+                headerBgVariant: 'info',
+                headerTextVariant: 'light',
+                footerBgVariant: 'dark',
             };
         },
         methods: {
@@ -108,23 +167,28 @@
 
             },
             fav(id) {
-                //console.log(id)
                 this.$store.commit('SET_FILM', id);
+                this.$store.commit('SET_LE_FILM', id);
                 axios.get(`https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=c4183e64dc74d13d605f6815173449f3&language=fr-FR`)
                     .then((response) => {
                         if (response) {
                             this.$store.commit('SET_CASTFILM', response.data.cast);
                             this.$store.commit('SET_CREWFILM', response.data.crew);
+                            this.castFilm = response.data.cast;
+                            this.crewFilm = response.data.crew;
+                            this.realisateur = this.crewFilm[0][0].name;
                         }
-                    })
+                    });
                 axios.get(`https://api.themoviedb.org/3/movie/${id.id}?api_key=c4183e64dc74d13d605f6815173449f3&language=fr-FR`)
                     .then((response) => {
                         if (response) {
                             this.$store.commit('SET_AFFICHEFILM', response.data.poster_path);
-                            //console.log(response.data.poster_path)
-                            //console.log(this.$store.state.afficheFilm)
+                            this.infoFilm = this.$store.getters.unFilm;
+                            this.codeAffiche = this.baseAffiche + response.data.poster_path;
+                            console.log("test : " + this.infoFilm.original_title);
                         }
-                })
+                    });
+
             }
         }
     }
@@ -159,6 +223,6 @@
     }
 
     .float_left_button {
-      float:right;
+        float: right;
     }
 </style>

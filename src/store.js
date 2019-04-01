@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Filmotheque from "./models/Filmotheque";
 //import Filmotheque from "./models/Filmotheque";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -11,7 +11,8 @@ export default new Vuex.Store({
     filmotheque: new Filmotheque(),
     afficheFilm: [],
     castFilm: [],
-    crewFilm: []
+    crewFilm: [],
+    leFilm: {}
   },
   getters: {
     laFilmotheque: state =>{
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     leFilm: state => {
       return state.film
+    },
+    unFilm: state => {
+      return state.leFilm
     },
     lAfficheFilm: state => {
       return state.afficheFilm
@@ -39,6 +43,9 @@ export default new Vuex.Store({
     },
     SET_FILM: (state, index) => {
       state.film.push(index)
+    },
+    SET_LE_FILM: (state, index) => {
+      state.leFilm = index
     },
     SET_CASTFILM: (state, cast) => {
       state.castFilm.push(cast)

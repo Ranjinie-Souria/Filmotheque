@@ -4,22 +4,19 @@
             Modal
         </b-button>
         <!-- Modal Component -->
-        <b-modal id="modal-1" title="Film Favori">
+        <b-modal id="modal-1" title="Film Favori"
+                 :header-bg-variant="headerBgVariant"
+                 :header-text-variant="headerTextVariant"
+                 :footer-bg-variant="footerBgVariant">
             <div>
                 <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
             </div>
             <div>
                 <b-table class="tableFilm" :items="infoFilm" :fields="fieldsFilm">
-                    <template slot="titre">
-                        {{this.infoFilm[0].title}}
-                    </template>
-                    <template slot="date_de_sortie">
-                        {{this.infoFilm[0].release_date}}
-                    </template>
                 </b-table>
-                <b-table class="tableFilmReal" :items="crewFilm" :fields="fieldsReal">
+                <b-table class="tableFilmReal" :items="crewFilm" :fields="fieldsReal" slot-scope="row">
                     <template slot="realisateur">
-                        {{crewFilm[0][0].name}}
+                        {{crewFilm[row.item][0].name}}
                     </template>
                 </b-table>
                 <b-table class="tableFilmActeurs" :items="castFilm[0]" :fields="fieldsAct" :per-page="perPage">
@@ -42,16 +39,20 @@
                 crewFilm: [],
                 baseAffiche: ["https://image.tmdb.org/t/p/w500"],
                 codeAffiche: [],
-                fieldsFilm: ['titre', 'date_de_sortie', ],
+                fieldsFilm: ['original_title', 'release_date'],
                 fieldsReal: ['realisateur'],
                 fieldsAct: ['acteurs'],
+                //variant du modal
+                headerBgVariant: 'info',
+                headerTextVariant: 'light',
+                footerBgVariant: 'dark',
             };
         },
         created() {
-            this.infoFilm = this.$store.getters.leFilm
-            this.castFilm = this.$store.getters.leCastFilm
-            this.crewFilm = this.$store.getters.leCrewFilm
-            this.codeAffiche = this.baseAffiche+this.$store.getters.lAfficheFilm
+            this.infoFilm = this.$store.getters.leFilm;
+            this.castFilm = this.$store.getters.leCastFilm;
+            this.crewFilm = this.$store.getters.leCrewFilm;
+            this.codeAffiche = this.baseAffiche+this.$store.getters.lAfficheFilm;
         },
         methods: {
             submit(){
