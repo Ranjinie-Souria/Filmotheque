@@ -6,10 +6,11 @@
 
             <b-card class="text-center">
                 <div style="width: 60%;margin-left: auto;margin-right: auto;">
-                    <div style="font-weight: bold;color: darkturquoise;font-size: 18px;"> Bienvenue sur la filmothèque !<br/></div>
+                    <div style="padding: 6px;font-weight: bold;color: darkturquoise;font-size: 18px;"> Bienvenue sur la filmothèque
+                        <img style="margin-right: 10px;margin-bottom: 20px" src="../assets/coeur.png" alt="coeur"/><br/></div>
                     Vous pouvez rechercher un film et l'ajouter à vos favoris.
                     Une fois votre film ajouté à vos favoris, vous pourrez écrire un commentaire et le noter.</div>
-                <img style="float: top;padding: 10px;" src="../assets/fav.png" alt="coeur"/><br/>
+                <br/>
             </b-card>
             <br/>
 

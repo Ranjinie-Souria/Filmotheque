@@ -32,6 +32,7 @@
   color: darkturquoise;
 }
 
+
 h1 {
   font-size: 72px;
   text-shadow: 2px 2px 2px darkcyan;
