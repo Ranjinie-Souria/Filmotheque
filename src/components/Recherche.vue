@@ -1,19 +1,24 @@
 <template>
     <div class="hello">
         <h1>Ma filmothèque</h1>
-        <p>
-            Bienvenue sur la filmothèque. Vous pouvez rechercher un film.
-
-        </p>
-
         <br/>
         <b-container class="bv-example-row">
+
+            <b-card class="text-center"><img style="float: top;padding: 10px;" src="../assets/fav.png" alt="coeur"/><br/>
+                <div style="width: 60%;margin-left: auto;margin-right: auto;">
+                Bienvenue sur la filmothèque !<br/>
+                Vous pouvez rechercher un film et l'ajouter à vos favoris.
+                Une fois votre film ajouté à vos favoris, vous pourrez écrire un commentaire et le noter.</div>
+            </b-card>
+            <br/>
+
+
             <b-row>
 
                 <b-col sm="12">
                     <b-card class="text-center">
                         <b-card-title style="max-width: 20rem;" class="mb-2">
-                            Recherche d'un film
+                            <h2>Recherche d'un film</h2>
                         </b-card-title>
                         <b-card-text>
                             <b-form @submit.prevent="submit">

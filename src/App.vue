@@ -15,7 +15,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: whitesmoke;
+  background-color: aliceblue;
   color: #2c3e50;
 }
 #nav {
@@ -30,5 +30,19 @@
 
 #nav a.router-link-exact-active {
   color: darkturquoise;
+}
+
+h1 {
+  font-size: 72px;
+  text-shadow: 2px 2px 2px darkcyan;
+  color: turquoise;
+  font-family: "Bahnschrift", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  font-size: 72px;
+  text-shadow: 1px 1px 2px royalblue;
+  color: darkturquoise;
+  font-family: "Bahnschrift", Helvetica, Arial, sans-serif;
 }
 </style>
