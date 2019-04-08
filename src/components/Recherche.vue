@@ -6,9 +6,9 @@
 
             <b-card class="text-center"><img style="float: top;padding: 10px;" src="../assets/fav.png" alt="coeur"/><br/>
                 <div style="width: 60%;margin-left: auto;margin-right: auto;">
-                Bienvenue sur la filmothèque !<br/>
-                Vous pouvez rechercher un film et l'ajouter à vos favoris.
-                Une fois votre film ajouté à vos favoris, vous pourrez écrire un commentaire et le noter.</div>
+                    Bienvenue sur la filmothèque !<br/>
+                    Vous pouvez rechercher un film et l'ajouter à vos favoris.
+                    Une fois votre film ajouté à vos favoris, vous pourrez écrire un commentaire et le noter.</div>
             </b-card>
             <br/>
 
@@ -60,7 +60,6 @@
                 </template>
             </b-table>
 
-
             <b-modal id="modal-1" size="lg" title="Voulez-vous ajouter ce film dans vos favoris ?"
                      :header-bg-variant="headerBgVariant"
                      :header-text-variant="headerTextVariant"
@@ -70,7 +69,6 @@
                      :cancel-title="cancelTitle"
                      :ok-variant="okVariant"
                      :ok-title="okTitle">
-
                 <div>
                     <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
                 </div>
@@ -95,15 +93,9 @@
                         </template>
                     </b-table></div>
                 </div>
-
-
             </b-modal>
-
         </div>
-
     </div>
-
-
 </template>
 
 <script>
@@ -112,24 +104,30 @@
     export default {
         data() {
             return {
+                //Ajout de une ligne dans le modal pour faire la boucle
                 ligneModal: [""],
                 titleFilmFav: [],
+                //Titres des colonnes de la liste
                 fields: ['title', 'description', 'add'],
+                //Paramètres de la recherche de films
                 current_title_search: "",
                 resultat: "",
                 recherche: false,
+                //Limite du nombre d'acteur principaux
                 perPage: 5,
+                //Information sur le film cliqué
                 infoFilm: [],
                 castFilm: [],
                 crewFilm: [],
                 realisateur: "",
-                titre : "",
+                //Composition de l'URL de l'affiche du film
                 baseAffiche: "https://image.tmdb.org/t/p/w500",
                 codeAffiche: "",
+                //Titres des colonnes du tableau modal
                 fieldsFilm: ['titre', 'date_de_sortie',],
                 fieldsReal: ['realisateur'],
                 fieldsAct: ['acteurs'],
-                //variant du modal
+                //Variant du modal
                 headerBgVariant: 'info',
                 headerTextVariant: 'light',
                 footerBgVariant: 'dark',
