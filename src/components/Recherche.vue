@@ -3,13 +3,10 @@
         <h1>Ma filmothèque</h1>
         <p>
             Bienvenue sur la filmothèque. Vous pouvez rechercher un film.
-
         </p>
-
         <br/>
         <b-container class="bv-example-row">
             <b-row>
-
                 <b-col sm="12">
                     <b-card class="text-center">
                         <b-card-title style="max-width: 20rem;" class="mb-2">
@@ -55,7 +52,6 @@
                 </template>
             </b-table>
 
-
             <b-modal id="modal-1" size="lg" title="Voulez-vous ajouter ce film dans vos favoris ?"
                      :header-bg-variant="headerBgVariant"
                      :header-text-variant="headerTextVariant"
@@ -65,7 +61,6 @@
                      :cancel-title="cancelTitle"
                      :ok-variant="okVariant"
                      :ok-title="okTitle">
-
                 <div>
                     <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
                 </div>
@@ -90,15 +85,9 @@
                         </template>
                     </b-table></div>
                 </div>
-
-
             </b-modal>
-
         </div>
-
     </div>
-
-
 </template>
 
 <script>
@@ -107,24 +96,30 @@
     export default {
         data() {
             return {
+                //Ajout de une ligne dans le modal pour faire la boucle
                 ligneModal: [""],
                 titleFilmFav: [],
+                //Titres des colonnes de la liste
                 fields: ['title', 'description', 'add'],
+                //Paramètres de la recherche de films
                 current_title_search: "",
                 resultat: "",
                 recherche: false,
+                //Limite du nombre d'acteur principaux
                 perPage: 5,
+                //Information sur le film cliqué
                 infoFilm: [],
                 castFilm: [],
                 crewFilm: [],
                 realisateur: "",
-                titre : "",
+                //Composition de l'URL de l'affiche du film
                 baseAffiche: "https://image.tmdb.org/t/p/w500",
                 codeAffiche: "",
+                //Titres des colonnes du tableau modal
                 fieldsFilm: ['titre', 'date_de_sortie',],
                 fieldsReal: ['realisateur'],
                 fieldsAct: ['acteurs'],
-                //variant du modal
+                //Variant du modal
                 headerBgVariant: 'info',
                 headerTextVariant: 'light',
                 footerBgVariant: 'dark',
