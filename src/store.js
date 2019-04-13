@@ -54,7 +54,7 @@ export default new Vuex.Store({
       state.crewFilm.push(crew)
     },
     SET_AFFICHEFILM: (state, affiche) => {
-      state.afficheFilm.push(affiche)
+      state.afficheFilm = affiche
     }
   },
   actions: {

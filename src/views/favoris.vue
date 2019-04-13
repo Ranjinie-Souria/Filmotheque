@@ -13,6 +13,7 @@
 
             <!-- Affichage du memo -->
             <template slot="memo" slot-scope="row">
+                
                 <p v-if="row.item.memo.length <= 0">
                     Pas de memo
                 </p>
@@ -44,18 +45,9 @@
             </template>
             <!-- Fin de l'affichage des acteurs principaux -->
             
-
             <!-- Affichage de l'affiche -->
             <template slot="affiche" slot-scope="row">
-                <div v-if="row.item.affiche.length <= 1">
                 <b-img class="affiche_fav" v-bind:src="'https://image.tmdb.org/t/p/w500/'+row.item.affiche" fluid alt="Responsive image"></b-img>
-                </div>
-                <div v-else-if="row.item.affiche.length == 0" >
-                    <p class="no-img-text">Pas d'image disponible, désolé</p>
-                </div>
-                <div v-else>
-                <b-img class="affiche_fav" v-bind:src="'https://image.tmdb.org/t/p/w500/'+row.item.affiche[0]" fluid alt="Responsive image"></b-img>
-                </div>
             </template>
             <!-- Fin de l'affichage de l'affiche -->
 
@@ -76,9 +68,7 @@
                             <div class="buttons-rating" v-for="i in (0,5)" :key="i">
                             <b-button v-if="i == row.item.rating" class="button-list" size="sm" @click="update_rating(row.item, i); row.toggleDetails;" style="background-color: green;border-color: darkturquoise;">{{i}}</b-button>
                             <b-button v-else class="button-list" size="sm" @click="update_rating(row.item, i)" style="background-color: turquoise;border-color: darkturquoise;">{{i}}</b-button>
-
                             </div>
-
                         </b-row>
                     </b-card>
 

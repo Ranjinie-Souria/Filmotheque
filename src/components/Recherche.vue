@@ -192,21 +192,16 @@
                     });
                 axios.get(`https://api.themoviedb.org/3/movie/${id.id}?api_key=c4183e64dc74d13d605f6815173449f3&language=fr-FR`)
                     .then((response) => {
+                    console.log("test : " + response.data);
+
                         if (response) {
                             this.$store.commit('SET_AFFICHEFILM', response.data.poster_path);
-                            //this.infoFilm = this.$store.getters.unFilm;
                             this.codeAffiche = this.baseAffiche + response.data.poster_path;
-                            //console.log("test : " + this.infoFilm.original_title);
+
                         }
                     });
 
-            },
-            //tradDate(str) {
-            //    var annee = str.substr(0, 4);
-            //    var mois = str.substr(5, 2);
-            //    var jour = str.substr(8, 2);
-            //    return jour + " - " + mois + " - " + annee;
-            //}
+            }
         }
     }
 </script>
