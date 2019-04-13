@@ -65,7 +65,8 @@
                         <b-row class="">
                             <h4>Modifier votre note : </h4>
                             
-                            <div class="buttons-rating" v-for="i in (0,5)" :key="i">
+                            <div class="buttons-rating" v-for="i in available_ratings" :key="i">
+                                
                             <b-button v-if="i == row.item.rating" class="button-list" size="sm" @click="update_rating(row.item, i); row.toggleDetails;" style="background-color: green;border-color: darkturquoise;">{{i}}</b-button>
                             <b-button v-else class="button-list" size="sm" @click="update_rating(row.item, i)" style="background-color: turquoise;border-color: darkturquoise;">{{i}}</b-button>
                             </div>
@@ -121,7 +122,10 @@ export default {
                                     ], 
 
             // Utilisee pour la modification des memos
-            text_area_value: ""
+            text_area_value: "",
+
+            // Les notes possibles
+            available_ratings: [0, 1, 2, 3, 4, 5]
         }
     },
     created: function () {
