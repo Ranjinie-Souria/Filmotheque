@@ -34,7 +34,7 @@
                     {{ row.item.overview.substr(0, 70) }}...
                     <b-button size="sm" @click="row.toggleDetails" class="mr-2 float_left_button"
                               style="background-color: turquoise;border-color: darkturquoise;">
-                        {{ row.detailsShowing ? '-' : '+'}}
+                        {{ row.detailsShowing ? '-' : '+'}} 
                     </b-button>
                 </template>
                 <template slot="row-details" slot-scope="row">
@@ -60,7 +60,10 @@
                      :cancel-variant="cancelVariant"
                      :cancel-title="cancelTitle"
                      :ok-variant="okVariant"
-                     :ok-title="okTitle">
+                     :ok-title="okTitle"
+                     @ok="add_favoris"
+                     
+                     >
                 <div>
                     <b-img class="image" v-bind:src="codeAffiche" fluid alt="Responsive image"></b-img>
                 </div>
@@ -92,7 +95,7 @@
 
 <script>
     import axios from 'axios'
-
+    import FavHandler from '@/models/FavHandler.js'
     export default {
         data() {
             return {
@@ -130,6 +133,11 @@
             };
         },
         methods: {
+
+            add_favoris() {
+                FavHandler.add_favoris(this.infoFilm, this.castFilm, 
+                this.$store.getters.lAfficheFilm, this.realisateur)
+            },
             submit() {
                 //console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
                 if (this.title.length >= 1) {
