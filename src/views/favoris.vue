@@ -64,12 +64,15 @@
                     <b-card class="update-rating">
                         <b-row class="">
                             <h4>Modifier votre note : </h4>
-                            
-                            <div class="buttons-rating" v-for="i in available_ratings" :key="i">
-                                
-                            <b-button v-if="i == row.item.rating" class="button-list" size="sm" @click="update_rating(row.item, i); row.toggleDetails;" style="background-color: green;border-color: darkturquoise;">{{i}}</b-button>
+                        </b-row>
+                            <b-row class="" style="padding-left:10px;">
+                            <!-- <div class="buttons-rating" v-for="i in available_ratings" :key="i"> -->
+                            </b-row>
+                            <b-row>
+                                <div class="buttons-rating" v-for="i in available_ratings" :key="i">
+                            <b-button class="button-list" v-if="i == row.item.rating"  size="sm" @click="update_rating(row.item, i); row.toggleDetails;" style="background-color: green;border-color: darkturquoise;">{{i}}</b-button>
                             <b-button v-else class="button-list" size="sm" @click="update_rating(row.item, i)" style="background-color: turquoise;border-color: darkturquoise;">{{i}}</b-button>
-                            </div>
+                                </div>
                         </b-row>
                     </b-card>
 
@@ -77,11 +80,19 @@
                      <b-card class="update-memo">
                         <b-row class="row-update-memo">
                             <h4 class="title_update_memo">Modification du memo :</h4><br/>
-                            <p class="desc-update-memo">Maximum 30 charactères</p>
-                            <br>
-                            <textarea  maxlength="30" v-model="text_area_value">{{row.item.value}}</textarea>
-                            <b-button class="button-memo" size="md" @click="update_memo(row.item, text_area_value), row.toggleDetails;" style="background-color: darkturquoise;border-color: darkturquoise;">Modifier</b-button>
+                        </b-row>
+                        <b-row class="row-update-memo">
 
+                            <p class="desc-update-memo">Maximum 30 charactères</p>
+                        </b-row>
+                        <b-row class="row-update-memo">
+                           
+                            <b-form-textarea  
+                                maxlength="30" 
+                                v-model="row.item.memo" 
+                                :state="row.item.memo.length <= 30"
+                                ></b-form-textarea>
+                            <b-button class="button-memo" size="md" @click="update_memo(row.item, row.item.memo), row.toggleDetails;" style="background-color: darkturquoise;border-color: darkturquoise;">Modifier</b-button>
                         </b-row>
                     </b-card>
             </template>
@@ -232,5 +243,6 @@ export default {
 .title_update_memo {
     font-size: 20px;
 }
+
 
 </style>
