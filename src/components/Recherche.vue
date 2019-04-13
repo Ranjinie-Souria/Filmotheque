@@ -1,16 +1,26 @@
 <template>
     <div class="hello">
         <h1>Ma filmothèque</h1>
-        <p>
-            Bienvenue sur la filmothèque. Vous pouvez rechercher un film.
-        </p>
         <br/>
         <b-container class="bv-example-row">
+
+            <b-card class="text-center">
+                <div style="width: 60%;margin-left: auto;margin-right: auto;">
+                    <div style="padding: 6px;font-weight: bold;color: darkturquoise;font-size: 18px;"> Bienvenue sur la filmothèque
+                        <img style="margin-right: 10px;margin-bottom: 20px" src="../assets/coeur.png" alt="coeur"/><br/></div>
+                    Vous pouvez rechercher un film et l'ajouter à vos favoris.
+                    Une fois votre film ajouté à vos favoris, vous pourrez écrire un commentaire et le noter.</div>
+                <br/>
+            </b-card>
+            <br/>
+
+
             <b-row>
+
                 <b-col sm="12">
                     <b-card class="text-center">
                         <b-card-title style="max-width: 20rem;" class="mb-2">
-                            Recherche d'un film
+                            <h2>Recherche d'un film</h2>
                         </b-card-title>
                         <b-card-text>
                             <b-form @submit.prevent="submit">
@@ -45,7 +55,7 @@
                     </b-card>
                 </template>
                 <template slot="add" slot-scope="row">
-                    <button v-b-popover.hover.lefttop="'Fera apparaître une fenêtre pour ajouter le film aux favoris'" title="Ajout aux favoris" type="button"
+                    <button v-b-popover.hover.lefttop="'Ajout aux favoris'" type="button"
                             v-b-modal.modal-1="" class="btn" style="background-color: white;border-color: whitesmoke;">
                         <img src="../assets/fav.png" @click="fav(row.item)" alt="fav"/>
                     </button>
