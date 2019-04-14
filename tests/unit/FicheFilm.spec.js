@@ -16,7 +16,7 @@ test('Exemple où la FicheFilm est vide', () => {
     expect(film.realisateur).toMatch('');
     expect(film.acteurPrincipaux).toMatch('');
 });
-test('Exemple avec 1 element demandé dans la FicheFilm', () => {
+test('Exemple avec 1 element en mois dans la FicheFilm', () => {
     const film = new FicheFilm("avatar", "", "2019-01-01", "Steven Spielberg", "Pedro le rigolo");
     expect(film.nom).toMatch('avatar');
     expect(film.affiche).toMatch('');
