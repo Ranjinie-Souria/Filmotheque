@@ -52,8 +52,8 @@
 
                     <!-- Affichage des acteurs principaux -->
                     <template slot="acteurPrincipaux" slot-scope="row">
-                        <p class="actor-name" v-for="(actor, i) in row.item.acteurPrincipaux" :key="i" v-if="i <= 5">
-                            {{actor.name}}
+                        <p class="actor-name" v-for="(actor, i) in row.item.acteurPrincipaux" :key="i" >
+                            <span v-if="i <= 5">{{actor.name}}</span>
                         </p>
                     </template>
                     <!-- Fin de l'affichage des acteurs principaux -->
@@ -267,7 +267,7 @@
     }
 
     .update-memo > * {
-        display: block;
+        /* display: block; */
     }
 
     .title_update_memo {
