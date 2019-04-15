@@ -38,7 +38,7 @@
             </b-row>
         </b-container>
         <br/>
-        <div v-if="recherche">
+        <div v-if="recherche"><b-container class="bv-example-row"><b-row><b-col sm="12"><b-card>
             <b-table class="tablefilm" :items="resultat" :fields="fields">
                 <template slot="description" slot-scope="row">
                     {{ row.item.overview.substr(0, 70) }}...
@@ -60,7 +60,7 @@
                         <img src="../assets/fav.png" @click="fav(row.item)" alt="fav"/>
                     </button>
                 </template>
-            </b-table>
+            </b-table></b-card></b-col></b-row></b-container>
 
             <b-modal id="modal-1" size="lg" title="Voulez-vous ajouter ce film dans vos favoris ?"
                      :header-bg-variant="headerBgVariant"
