@@ -106,6 +106,7 @@
 <script>
     import axios from 'axios'
     import FavHandler from '@/models/FavHandler.js'
+    import FicheFilm from "../models/FicheFilm";
     export default {
         data() {
             return {
@@ -145,8 +146,9 @@
         methods: {
 
             add_favoris() {
-                FavHandler.add_favoris(this.infoFilm, this.castFilm, 
-                this.$store.getters.lAfficheFilm, this.realisateur)
+                let fiche_film = new FicheFilm(this.infoFilm["title"], this.$store.getters.lAfficheFilm, this.infoFilm["release_date"], this.realisateur, this.castFilm)
+                FavHandler.add_favoris(fiche_film)
+
             },
             submit() {
                 //console.log(`https://api.themoviedb.org/3/search/movie?api_key=c4183e64dc74d13d605f6815173449f3&query=${this.title}`);
