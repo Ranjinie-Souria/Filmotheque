@@ -24,7 +24,7 @@ module.exports = {
   ],
   testURL: 'http://localhost/',
   watchPlugins: [
-    'C:\\Users\\bapti\\WebstormProjects\\filmotheque\\node_modules\\jest-watch-typeahead\\filename.js',
-    'C:\\Users\\bapti\\WebstormProjects\\filmotheque\\node_modules\\jest-watch-typeahead\\testname.js'
+    'C:\\Users\\Utilisateur\\vuejs\\filmotheque\\node_modules\\jest-watch-typeahead\\filename.js',
+    'C:\\Users\\Utilisateur\\vuejs\\filmotheque\\node_modules\\jest-watch-typeahead\\testname.js'
   ]
 }
