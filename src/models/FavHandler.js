@@ -6,27 +6,23 @@ export default class FavHandler{
 
     /**
      * Cette methode permet d'ajouter un favoris au LocalStorage
-     * @param {String} json_film string represant un film au format json
-     * @param {String} cast cast du film
-     * @param {String} img_path chemin de l'image sur IMDB
-     * @param {String} real realisateur
      */
-    static add_favoris(json_film, cast, img_path, real) {
+    static add_favoris(fiche_film) {
 
         // creation de la FicheFilm du film a ajouter en favoris
-        let fiche = new FicheFilm(json_film["title"], 
-                                  img_path, 
-                                  json_film["release_date"], 
-                                  real, 
-                                  cast
-                                  )
+        // let fiche = new FicheFilm(json_film["title"],
+        //                           img_path,
+        //                           json_film["release_date"],
+        //                           real,
+        //                           cast
+        //                           )
 
         // On recuperer les favoris
-        let favoris = this.get_favoris()
+        let favoris = this.get_favoris();
 
         // On ajoute le nouveau favoris
-        favoris.push(fiche);
-        
+            if(favoris.indexOf(fiche_film) == -1) favoris.push(fiche_film);
+
         // On sauvegarde les favoris
         this.save_fav_array(favoris);
     }
